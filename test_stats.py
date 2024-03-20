@@ -1,6 +1,6 @@
 from statistics import mean, variance, pvariance
 import statistics 
-from statzcw.stats import *
+from statzcw.statszcw import *
 from sys import argv
 
 data0 = [1.0, 2.0, 3.0, 4.0, 5.0]
