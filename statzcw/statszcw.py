@@ -58,7 +58,8 @@ def zvariance(data: List[float]) -> float:
 
 
 def zstddev(data: List[float]) -> float:
-    std_dev = sqrt.zvariance(data)
+    variance = zvariance(data)
+    std_dev = sqrt(variance)
     return std_dev
 
 
@@ -68,16 +69,22 @@ def zstderr(data: List[float]) -> float:
 
 
 def cov(a, b):
-    sum = 0
+    if len(a) != len(b):
+        raise ValueError("lists a and b must be same length")
     count = len(a)
-    c = sum/(count(a)-1)
-    if len(a) == len(b):
-        for i in range(0, count):
-            sum += ((a[i] - zmean(a)) * (b[i] - zmean(b)))
+    sum = 0
+    mean_a = zmean(a)
+    mean_b = zmean(b)
+
+    for i in range(0, count):
+        sum += (a[i] - mean_a) * (b[i] - mean_b)
+    c = sum / (count - 1)
     return c
 
 
 def zcorr(datax: List[float], datay: List[float]) -> float:
+    if len(datax) != len(datay):
+        raise ValueError("lists datax and datay must be same length")
     corr = cov(datax, datay)/(zstddev(datax) * zstddev(datay))
     return corr
 
