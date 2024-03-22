@@ -84,17 +84,25 @@ if __name__ == "__main__":
         xv = zvariance(x)
         yv = zvariance(y)
         xycorr = zcorr(x,y)
-        print(round(xbar, 3), round(xv, 3), round(ybar, 3), round(yv, 3), round(xycorr, 3))
-    print("system")
-    for k, v in z.items():
-        print(k)
-        x,y = v[0],v[1]
-        xc = len(x)
-        yc = len(y)
-        xbar = mean(x)
-        ybar = mean(y)
-        xv = variance(x)
-        yv = variance(y)
-        xycorr = zcorr(x,y)
-        print(round(xbar, 3), round(xv, 3), round(ybar, 3), round(yv, 3), round(xycorr, 3))
-    print("Everything should be _pretty close_ to each other, number-wise.")
+        print("Count of X = " + round(xc, 3) + "\n" +
+              "Count of Y = " + round(yc, 3) + "\n" +
+              "Mean of X = " + round(xbar, 3) + "\n" +
+              "Sample Variance of X = " + round(xv, 3) + "\n" +
+              "Mean of Y = " + round(ybar, 3) + "\n" +
+              "Sample Variance of Y = " + round(yv, 3) + "\n" +
+              "Correlation between X an Y = " + round(xycorr, 3))
+
+
+    # print("system")
+    # for k, v in z.items():
+    #     print(k)
+    #     x,y = v[0],v[1]
+    #     xc = len(x)
+    #     yc = len(y)
+    #     xbar = mean(x)
+    #     ybar = mean(y)
+    #     xv = variance(x)
+    #     yv = variance(y)
+    #     xycorr = zcorr(x,y)
+    #     print(round(xbar, 3), round(xv, 3), round(ybar, 3), round(yv, 3), round(xycorr, 3))
+    # print("Everything should be _pretty close_ to each other, number-wise.")

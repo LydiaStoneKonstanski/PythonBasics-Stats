@@ -107,3 +107,17 @@ def readDataSets(files):
         twoLists = readDataFile(file)
         data[file] = twoLists
     return data
+
+
+# a = [9,5,6,3,8,2,4]
+# b = []
+# for num in a:
+#     b.append(num + 5)
+# print(b)
+
+#OR
+
+# a = [9, 5, 6, 3, 8, 2, 4]
+# b = [num + 5 for num in a]
+# print(b)
+
