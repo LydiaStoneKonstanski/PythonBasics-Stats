@@ -1,0 +1,5 @@
+Filename,Count of X,Count of Y,Mean of X,Sample Variance of X,Mean of Y,Sample Variance of Y,Correlation of X and Y,Median of X,Mode of X,Median of Y,Mode of Y,Sample Std Deviation of X,Sample Std Deviation of Y,Standard Error of the Mean of X,Standard Error of the Mean of Y
+dataOne.csv,11,11,9.0,11.0,7.501,4.128,0.816,9.0,10.0,8.14,9.14,3.317,2.032,1.0,0.613
+dataThree.csv,11,11,9.0,11.0,7.501,4.123,0.817,8.0,8.0,7.04,6.58,3.317,2.031,1.0,0.612
+dataTwo.csv,11,11,9.0,11.0,7.5,4.123,0.816,9.0,10.0,7.11,7.46,3.317,2.03,1.0,0.612
+dataZero.csv,11,11,9.0,11.0,7.501,4.127,0.816,9.0,10.0,7.58,8.04,3.317,2.032,1.0,0.613

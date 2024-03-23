@@ -69,40 +69,76 @@ sample10 = [-14.82381293, -0.29423447, -13.56067979, -1.6288903, -0.31632439,
 # print("The statistics.variance of list is : " + str(res)) 
 
 if __name__ == "__main__":
-    #print("var of data0", zvariance(data0))
-    #print("corr of data0", zcorr(data0,data2))
-    z = readDataSets(argv[1:])
-    # print("z", z)
-    print("statzcw")
-    for k, v in z.items():
-        print(k)
-        x,y = v[0],v[1]
-        xc = zcount(x)
-        yc = zcount(y)
-        xbar = zmean(x)
-        ybar = zmean(y)
-        xv = zvariance(x)
-        yv = zvariance(y)
-        xycorr = zcorr(x,y)
-        print("Count of X = " + round(xc, 3) + "\n" +
-              "Count of Y = " + round(yc, 3) + "\n" +
-              "Mean of X = " + round(xbar, 3) + "\n" +
-              "Sample Variance of X = " + round(xv, 3) + "\n" +
-              "Mean of Y = " + round(ybar, 3) + "\n" +
-              "Sample Variance of Y = " + round(yv, 3) + "\n" +
-              "Correlation between X an Y = " + round(xycorr, 3))
+
+    with open("results/results.csv", 'w') as output_file:
+        output_file.write("Filename,"
+                          "Count of X,"
+                          "Count of Y,"
+                          "Mean of X,"
+                          "Sample Variance of X,"
+                          "Mean of Y,"
+                          "Sample Variance of Y,"
+                          "Correlation of X and Y,"
+                          "Median of X,"
+                          "Mode of X,"
+                          "Median of Y,"
+                          "Mode of Y,"
+                          "Sample Std Deviation of X,"
+                          "Sample Std Deviation of Y,"
+                          "Standard Error of the Mean of X,"
+                          "Standard Error of the Mean of Y\n")
+
+        z = readDataSets(argv[1:])
+
+        print("statzcw")
+        for file_name, v in z.items():
+            print(file_name)
+            x,y = v[0],v[1]
+            xc = zcount(x)
+            yc = zcount(y)
+            xbar = zmean(x)
+            ybar = zmean(y)
+            xv = zvariance(x)
+            yv = zvariance(y)
+            xycorr = zcorr(x,y)
+            xmed = zmedian(x)
+            ymed = zmedian(y)
+            xmod = zmode(x)
+            ymod = zmode(y)
+            xsd = zstddev(x)
+            ysd = zstddev(y)
+            xr = zstderr(x)
+            yr = zstderr(y)
 
 
-    # print("system")
-    # for k, v in z.items():
-    #     print(k)
-    #     x,y = v[0],v[1]
-    #     xc = len(x)
-    #     yc = len(y)
-    #     xbar = mean(x)
-    #     ybar = mean(y)
-    #     xv = variance(x)
-    #     yv = variance(y)
-    #     xycorr = zcorr(x,y)
-    #     print(round(xbar, 3), round(xv, 3), round(ybar, 3), round(yv, 3), round(xycorr, 3))
-    # print("Everything should be _pretty close_ to each other, number-wise.")
+            output_file.write(f"{file_name},"
+                              f"{round(xc, 3)},"
+                              f"{round(yc, 3)},"
+                              f"{round(xbar, 3)},"
+                              f"{round(xv, 3)},"
+                              f"{round(ybar, 3)},"
+                              f"{round(yv, 3)},"
+                              f"{round(xycorr, 3)},"
+                              f"{round(xmed,3)},"
+                              f"{round(xmod,3)},"
+                              f"{round(ymed,3)},"
+                              f"{round(ymod,3)},"
+                              f"{round( xsd,3)},"
+                              f"{round(ysd ,3)},"
+                              f"{round(xr ,3)},"
+                              f"{round(yr,3)}"
+                              f"\n")
+
+        print("system")
+        for k, v in z.items():
+            print(k)
+            x,y = v[0],v[1]
+            xc = len(x)
+            yc = len(y)
+            xbar = mean(x)
+            ybar = mean(y)
+            xv = variance(x)
+            yv = variance(y)
+            xycorr = zcorr(x,y)
+            print(round(xbar, 3), round(xv, 3), round(ybar, 3), round(yv, 3), round(xycorr, 3))
+        print("Everything should be _pretty close_ to each other, number-wise.")

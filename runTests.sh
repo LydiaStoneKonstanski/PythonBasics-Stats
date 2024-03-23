@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+# Run this file from Terminal using ./runTests.sh
 files=*.csv
 echo "Data sets:", $files
 echo

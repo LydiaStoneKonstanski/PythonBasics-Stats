@@ -6,18 +6,18 @@ from typing import List
 
 def zcount(data: List[float]) -> float:
     #with tools
-    return len(data)
+    # return len(data)
 
     #showing logic
-    # counter = 0
-    # for i in data:
-    #     counter = counter + 1
-    # return counter
+    counter = 0
+    for i in data:
+        counter = counter + 1
+    return counter
 
 
 def zmean(data: List[float]) -> float:
     #with tools
-    return sum(data) / len(data)
+    return sum(data) / zcount(data)
 
     # #showing logic
     # counter = zcount(data)
@@ -31,6 +31,8 @@ def zmode(data: List[float]) -> float:
     return statistics.mode(data)
 
     #showing logic
+    # mode_list = {}
+    # for i in data:
     # data.sort(reverse=True)
     # return data.index(0)
 
@@ -64,7 +66,7 @@ def zstddev(data: List[float]) -> float:
 
 
 def zstderr(data: List[float]) -> float:
-    s_error = zstddev(data)/ sqrt.zcount(data)
+    s_error = zstddev(data)/ sqrt(zcount(data))
     return s_error
 
 
