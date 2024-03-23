@@ -8,60 +8,72 @@ def zcount(data: List[float]) -> float:
     #with tools
     # return len(data)
 
-    #showing logic
+    #full length logic
     counter = 0
     for i in data:
-        counter = counter + 1
+        counter += 1
     return counter
 
 
 def zmean(data: List[float]) -> float:
-    #with tools
     return sum(data) / zcount(data)
 
-    # #showing logic
-    # counter = zcount(data)
-    # val = sum(data)
-    # total = val / counter
-    # return total
 
-
-def zmode(data: List[float]) -> float:
+def zmode(data: List[float]) -> list[float]:
     #with tools
-    return statistics.mode(data)
+    #return statistics.mode(data)
 
-    #showing logic
-    # mode_list = {}
-    # for i in data:
-    # data.sort(reverse=True)
-    # return data.index(0)
+    # full length logic
+    high = 0
+    mode: list[float] = []
+    for i in data:
+        count = data[i]
+        if count > high:
+            high = count
+        if count == high:
+            mode.append(i)
+    return mode
+
+    # Alternative Dictionary method with list comp
+    # mode_dict = {}
+    # for item in data:
+    #     mode_dict[item] = mode_dict.get(item, 0) + 1
+    # high_count = max(mode_dict.values())
+    # mode = [key for key, value in mode_dict.items() if value == high_count]
+    # return mode
 
 
 def zmedian(data: List[float]) -> float:
     #with tools
-    return statistics.median(data)
+    # return statistics.median(data)
 
-    #showing logic
-    # tmp = sorted(data)
-    # mid = len(tmp)
-    # return (tmp[mid] + tmp[-mid - 1])/2
+    # full length logic
+    a: int = zcount(data)
+    for i in range(a):
+        for j in range(i + 1, a):
+            if data[i] > data[j]:
+                data[i], data[j] = data[j], data[i]
+    if a % 2 == 0:
+        midL = data[a // 2 - 1]
+        midR = data[a // 2]
+        return(midL + midR) / 2
+    else:
+        return data[a // 2]
 
 
 def zvariance(data: List[float]) -> float:
     #with tools
-    return statistics.variance(data)
+    #return statistics.variance(data)
 
-    #showing logic
-    # n = zcount(data)
-    # m = zcount(data)
-    # deviations = [(x-m) **2 for x in data]
-    # s = sum(deviations)/n - 1
-    # return s
+    # full length logic
+    n = zcount(data)
+    deviations = [(x-n) **2 for x in data]
+    s = sum(deviations)/n - 1
+    return s
 
 
 def zstddev(data: List[float]) -> float:
-    variance = zvariance(data)
-    std_dev = sqrt(variance)
+    std_dev = sqrt(zvariance(data))
     return std_dev
 
 
@@ -71,21 +83,21 @@ def zstderr(data: List[float]) -> float:
 
 
 def cov(a, b):
-    if len(a) != len(b):
+    if zcount(a) != zcount(b):
         raise ValueError("lists a and b must be same length")
-    count = len(a)
-    sum = 0
+    count = zcount(a)
+    add = 0
     mean_a = zmean(a)
     mean_b = zmean(b)
 
     for i in range(0, count):
-        sum += (a[i] - mean_a) * (b[i] - mean_b)
-    c = sum / (count - 1)
+        add += (a[i] - mean_a) * (b[i] - mean_b)
+    c = add / (count - 1)
     return c
 
 
 def zcorr(datax: List[float], datay: List[float]) -> float:
-    if len(datax) != len(datay):
+    if zcount(datax) != zcount(datay):
         raise ValueError("lists datax and datay must be same length")
     corr = cov(datax, datay)/(zstddev(datax) * zstddev(datay))
     return corr
