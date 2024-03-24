@@ -1,4 +1,3 @@
-import statistics
 from itertools import count
 from math import sqrt
 from typing import List
@@ -24,14 +23,17 @@ def zmode(data: List[float]) -> list[float]:
     #return statistics.mode(data)
 
     # full length logic
-    high = 0
-    mode: list[float] = []
-    for i in data:
-        count = data[i]
-        if count > high:
-            high = count
-        if count == high:
-            mode.append(i)
+    count_dict = {}
+    #high = 0.0
+    #mode: list[float] = []
+    for item in data:
+        if item in count_dict.keys():
+            new_count = count_dict[item] + 1
+            count_dict[item] = new_count
+        else:
+            count_dict[item] = 1
+    print (count_dict)
+    mode = max(count_dict, key= lambda x: count_dict[x])
     return mode
 
     # Alternative Dictionary method with list comp
@@ -66,10 +68,7 @@ def zvariance(data: List[float]) -> float:
     #return statistics.variance(data)
 
     # full length logic
-    n = zcount(data)
-    deviations = [(x-n) **2 for x in data]
-    s = sum(deviations)/n - 1
-    return s
+    return(sum([(x-zmean(data))**2 for x in data]) /float(zcount(data)-1))
 
 
 def zstddev(data: List[float]) -> float:
@@ -101,6 +100,7 @@ def zcorr(datax: List[float], datay: List[float]) -> float:
         raise ValueError("lists datax and datay must be same length")
     corr = cov(datax, datay)/(zstddev(datax) * zstddev(datay))
     return corr
+
 
 
 def readDataFile(file):
